@@ -27,7 +27,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Home</Text>
 
-      {submissions.length ? submissions.map((item: any, i: number) => <SubmissionItem submission={item.data} key={i} />) : null}
+      {submissions.length ? submissions.map((item: any, i: number) => <SubmissionItem nav={navigation} submission={item.data} key={i} />) : null}
     </ScrollView>
   );
 }
