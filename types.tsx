@@ -23,7 +23,7 @@ export type RootStackParamList = {
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<RootStackParamList, Screen>;
 
 export type RootTabParamList = {
-  Home: undefined;
+  Subreddit: undefined;
   Explore: undefined;
   Profile: undefined;
   Submit: undefined;

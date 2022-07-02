@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-
-import { Text, View } from '../components/Themed';
+import { ScrollView } from 'react-native';
+import tw from 'twrnc';
 import { RootTabScreenProps } from '../types';
 
 import { get } from 'superagent';
-import SubmissionItem from '../components/Subreddit/SubmissionItem';
+import SubmissionItem from './Subreddit/SubmissionItem';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
   const [submissions, setSubmissions] = useState([]);
@@ -13,7 +13,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
   useEffect(() => {
     const fetchSubmissions = async () => {
       try {
-        const result = await get('https://reddit.com/r/all.json');
+        const result = await get('http://localhost:5001/reddit-client-2acf6/us-central1/api/all');
         setSubmissions(result.body.data.children);
       } catch (error) {
         console.log(error);
@@ -24,27 +24,10 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
   }, []);
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.title}>Home</Text>
-
-      {submissions.length ? submissions.map((item: any, i: number) => <SubmissionItem nav={navigation} submission={item.data} key={i} />) : null}
-    </ScrollView>
+    <SafeAreaView>
+      <ScrollView>
+        {submissions.length ? submissions.map((item: any, i: number) => <SubmissionItem nav={navigation} submission={item.data} key={i} />) : null}
+      </ScrollView>
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    // flex: 1,
-    // alignItems: 'center',
-    // justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Pressable, StyleSheet } from 'react-native';
-import { Text, View } from '../components/Themed';
-import { RootTabScreenProps } from '../types';
+import { Text, View } from '../../shared/Themed';
+import { RootTabScreenProps } from '../../types';
 import tw from 'twrnc';
 
 export default function ProfileScreen({ navigation }: RootTabScreenProps<'Profile'>) {
@@ -22,8 +22,8 @@ export default function ProfileScreen({ navigation }: RootTabScreenProps<'Profil
         <View style={tw`text-center`}>
           <Text style={tw`mb-4`}>Login to view your profile.</Text>
 
-          <Pressable onPress={handleLogin}>
-            <Text style={tw`bg-indigo-800 text-white rounded-lg px-4 py-2 text-center`}>Login with Reddit</Text>
+          <Pressable style={tw`bg-indigo-800 text-white rounded-md p-4 text-center`} onPress={handleLogin}>
+            <Text style={tw`text-center text-white`}>Login with Reddit</Text>
           </Pressable>
         </View>
       )}
